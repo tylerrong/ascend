@@ -1,0 +1,254 @@
+{
+  "programs": [
+    {
+      "id": "aa-aadvantage",
+      "name": "American Airlines AAdvantage",
+      "type": "airline",
+      "websiteURL": "https://www.aa.com/aadvantage",
+      "logoName": "aa-logo",
+      "pointsCurrency": "AAdvantage Miles",
+      "estimatedPointValue": 0.014,
+      "features": ["Award flights", "Upgrade eligibility", "Priority boarding", "Lounge access"]
+    },
+    {
+      "id": "delta-skymiles",
+      "name": "Delta Air Lines SkyMiles",
+      "type": "airline",
+      "websiteURL": "https://www.delta.com/skymiles",
+      "logoName": "delta-logo",
+      "pointsCurrency": "SkyMiles",
+      "estimatedPointValue": 0.012,
+      "features": ["Award flights", "Upgrade eligibility", "Priority boarding", "Sky Club access"]
+    },
+    {
+      "id": "united-mileageplus",
+      "name": "United Airlines MileagePlus",
+      "type": "airline",
+      "websiteURL": "https://www.united.com/mileageplus",
+      "logoName": "united-logo",
+      "pointsCurrency": "MileagePlus Miles",
+      "estimatedPointValue": 0.013,
+      "features": ["Award flights", "Upgrade eligibility", "Priority boarding", "United Club access"]
+    },
+    {
+      "id": "southwest-rapidrewards",
+      "name": "Southwest Airlines Rapid Rewards",
+      "type": "airline",
+      "websiteURL": "https://www.southwest.com/rapidrewards",
+      "logoName": "southwest-logo",
+      "pointsCurrency": "Rapid Rewards Points",
+      "estimatedPointValue": 0.014,
+      "features": ["Award flights", "Companion Pass eligibility", "No blackout dates"]
+    },
+    {
+      "id": "alaska-mileageplan",
+      "name": "Alaska Airlines Mileage Plan",
+      "type": "airline",
+      "websiteURL": "https://www.alaskaair.com/mileageplan",
+      "logoName": "alaska-logo",
+      "pointsCurrency": "Mileage Plan Miles",
+      "estimatedPointValue": 0.018,
+      "features": ["Award flights", "MVP status", "Partner awards", "Lounge access"]
+    },
+    {
+      "id": "jetblue-trueblue",
+      "name": "JetBlue TrueBlue",
+      "type": "airline",
+      "websiteURL": "https://www.jetblue.com/trueblue",
+      "logoName": "jetblue-logo",
+      "pointsCurrency": "TrueBlue Points",
+      "estimatedPointValue": 0.013,
+      "features": ["Award flights", "Mosaic status", "No blackout dates"]
+    },
+    {
+      "id": "hawaiian-hawaiianmiles",
+      "name": "Hawaiian Airlines HawaiianMiles",
+      "type": "airline",
+      "websiteURL": "https://www.hawaiianairlines.com/hawaiianmiles",
+      "logoName": "hawaiian-logo",
+      "pointsCurrency": "HawaiianMiles",
+      "estimatedPointValue": 0.009,
+      "features": ["Award flights", "Upgrade eligibility", "Partner awards"]
+    },
+    {
+      "id": "frontier-miles",
+      "name": "Frontier Airlines FRONTIER Miles",
+      "type": "airline",
+      "websiteURL": "https://www.flyfrontier.com/frontier-miles",
+      "logoName": "frontier-logo",
+      "pointsCurrency": "FRONTIER Miles",
+      "estimatedPointValue": 0.011,
+      "features": ["Award flights", "Family pooling", "Elite status"]
+    },
+    {
+      "id": "spirit-freespirit",
+      "name": "Spirit Airlines Free Spirit",
+      "type": "airline",
+      "websiteURL": "https://www.spirit.com/free-spirit",
+      "logoName": "spirit-logo",
+      "pointsCurrency": "Free Spirit Points",
+      "estimatedPointValue": 0.011,
+      "features": ["Award flights", "Status points", "Points pooling"]
+    },
+    {
+      "id": "breeze-breezyrewards",
+      "name": "Breeze Airways Breezy Rewards",
+      "type": "airline",
+      "websiteURL": "https://www.flybreeze.com/breezy-rewards",
+      "logoName": "breeze-logo",
+      "pointsCurrency": "BreezePoints",
+      "estimatedPointValue": 0.01,
+      "features": ["Award flights", "Flexible redemption"]
+    },
+    {
+      "id": "marriott-bonvoy",
+      "name": "Marriott Bonvoy",
+      "type": "hotel",
+      "websiteURL": "https://www.marriott.com/bonvoy",
+      "logoName": "marriott-logo",
+      "pointsCurrency": "Bonvoy Points",
+      "estimatedPointValue": 0.007,
+      "features": ["Free nights", "Room upgrades", "Late checkout", "Airline transfers"]
+    },
+    {
+      "id": "hilton-honors",
+      "name": "Hilton Honors",
+      "type": "hotel",
+      "websiteURL": "https://www.hilton.com/honors",
+      "logoName": "hilton-logo",
+      "pointsCurrency": "Hilton Honors Points",
+      "estimatedPointValue": 0.005,
+      "features": ["Free nights", "Room upgrades", "Executive lounge access"]
+    },
+    {
+      "id": "ihg-onerewards",
+      "name": "IHG One Rewards",
+      "type": "hotel",
+      "websiteURL": "https://www.ihg.com/onerewards",
+      "logoName": "ihg-logo",
+      "pointsCurrency": "IHG Points",
+      "estimatedPointValue": 0.005,
+      "features": ["Free nights", "Room upgrades", "Milestone rewards"]
+    },
+    {
+      "id": "hyatt-worldofhyatt",
+      "name": "World of Hyatt",
+      "type": "hotel",
+      "websiteURL": "https://www.hyatt.com/world-of-hyatt",
+      "logoName": "hyatt-logo",
+      "pointsCurrency": "World of Hyatt Points",
+      "estimatedPointValue": 0.017,
+      "features": ["Free nights", "Suite upgrades", "Guest of Honor"]
+    },
+    {
+      "id": "wyndham-rewards",
+      "name": "Wyndham Rewards",
+      "type": "hotel",
+      "websiteURL": "https://www.wyndhamhotels.com/wyndham-rewards",
+      "logoName": "wyndham-logo",
+      "pointsCurrency": "Wyndham Rewards Points",
+      "estimatedPointValue": 0.009,
+      "features": ["Free nights", "Room upgrades", "Status match"]
+    },
+    {
+      "id": "choice-privileges",
+      "name": "Choice Privileges",
+      "type": "hotel",
+      "websiteURL": "https://www.choicehotels.com/choice-privileges",
+      "logoName": "choice-logo",
+      "pointsCurrency": "Choice Privileges Points",
+      "estimatedPointValue": 0.006,
+      "features": ["Free nights", "Points sharing", "Elite benefits"]
+    },
+    {
+      "id": "accor-all",
+      "name": "ALL - Accor Live Limitless",
+      "type": "hotel",
+      "websiteURL": "https://all.accor.com",
+      "logoName": "accor-logo",
+      "pointsCurrency": "ALL Rewards Points",
+      "estimatedPointValue": 0.02,
+      "features": ["Free nights", "Room upgrades", "Dining rewards"]
+    },
+    {
+      "id": "bestwestern-rewards",
+      "name": "Best Western Rewards",
+      "type": "hotel",
+      "websiteURL": "https://www.bestwestern.com/rewards",
+      "logoName": "bestwestern-logo",
+      "pointsCurrency": "Best Western Rewards Points",
+      "estimatedPointValue": 0.006,
+      "features": ["Free nights", "Points never expire", "Status match"]
+    },
+    {
+      "id": "radisson-rewards",
+      "name": "Radisson Rewards",
+      "type": "hotel",
+      "websiteURL": "https://www.radissonhotels.com/rewards",
+      "logoName": "radisson-logo",
+      "pointsCurrency": "Radisson Rewards Points",
+      "estimatedPointValue": 0.004,
+      "features": ["Free nights", "Room upgrades", "Member exclusive rates"]
+    },
+    {
+      "id": "sonesta-travelpass",
+      "name": "Sonesta Travel Pass",
+      "type": "hotel",
+      "websiteURL": "https://www.sonesta.com/travel-pass",
+      "logoName": "sonesta-logo",
+      "pointsCurrency": "Travel Pass Points",
+      "estimatedPointValue": 0.006,
+      "features": ["Free nights", "Elite benefits", "Member rates"]
+    },
+    {
+      "id": "omni-selectguest",
+      "name": "Omni Select Guest",
+      "type": "hotel",
+      "websiteURL": "https://www.omnihotels.com/selectguest",
+      "logoName": "omni-logo",
+      "pointsCurrency": "Select Guest Points",
+      "estimatedPointValue": 0.005,
+      "features": ["Free nights", "Room upgrades", "Welcome amenities"]
+    },
+    {
+      "id": "loews-youfirst",
+      "name": "Loews YouFirst",
+      "type": "hotel",
+      "websiteURL": "https://www.loewshotels.com/youfirst",
+      "logoName": "loews-logo",
+      "pointsCurrency": "YouFirst Points",
+      "estimatedPointValue": 0.006,
+      "features": ["Free nights", "Room upgrades", "Late checkout"]
+    },
+    {
+      "id": "drury-rewards",
+      "name": "Drury Rewards",
+      "type": "hotel",
+      "websiteURL": "https://www.druryhotels.com/rewards",
+      "logoName": "drury-logo",
+      "pointsCurrency": "Drury Rewards Points",
+      "estimatedPointValue": 0.007,
+      "features": ["Free nights", "Points bonus", "Member rates"]
+    },
+    {
+      "id": "mgm-rewards",
+      "name": "MGM Rewards",
+      "type": "hotel",
+      "websiteURL": "https://www.mgmresorts.com/mgm-rewards",
+      "logoName": "mgm-logo",
+      "pointsCurrency": "MGM Rewards Points",
+      "estimatedPointValue": 0.007,
+      "features": ["Free nights", "Resort credits", "Show tickets"]
+    },
+    {
+      "id": "caesars-rewards",
+      "name": "Caesars Rewards",
+      "type": "hotel",
+      "websiteURL": "https://www.caesars.com/myrewards",
+      "logoName": "caesars-logo",
+      "pointsCurrency": "Reward Credits",
+      "estimatedPointValue": 0.01,
+      "features": ["Free nights", "Resort credits", "Entertainment perks"]
+    }
+  ]
+}

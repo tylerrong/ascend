@@ -1,0 +1,151 @@
+{
+  "programs": [
+    {
+      "id": "founderscard",
+      "name": "FoundersCard",
+      "type": "premium",
+      "websiteURL": "https://founderscard.com",
+      "logoName": "founderscard-logo",
+      "annualFee": 595,
+      "features": [
+        "Elite status with leading airlines and hotels",
+        "Premium travel benefits",
+        "Exclusive business networking events",
+        "Lifestyle and business savings"
+      ],
+      "benefits": [
+        "Complimentary Caesars Diamond Status",
+        "Hilton Honors Gold Status",
+        "United Silver Status opportunity",
+        "Exclusive hotel rates worldwide"
+      ],
+      "description": "A premier membership community for entrepreneurs and business innovators"
+    },
+    {
+      "id": "selectcard",
+      "name": "Select",
+      "type": "premium",
+      "websiteURL": "https://select.com",
+      "logoName": "select-logo",
+      "annualFee": 450,
+      "features": [
+        "Dining and nightlife privileges",
+        "Travel benefits",
+        "Lifestyle experiences",
+        "Financial services"
+      ],
+      "benefits": [
+        "Priority restaurant reservations",
+        "Hotel elite status",
+        "Exclusive event access",
+        "Concierge services"
+      ],
+      "description": "A next-generation membership that combines payments with premium benefits"
+    },
+    {
+      "id": "sohohouse",
+      "name": "Soho House",
+      "type": "premium",
+      "websiteURL": "https://www.sohohouse.com",
+      "logoName": "sohohouse-logo",
+      "annualFee": 2400,
+      "features": [
+        "Global house access",
+        "Member events",
+        "Workspace access",
+        "Dining privileges"
+      ],
+      "benefits": [
+        "Access to all Soho Houses worldwide",
+        "Priority restaurant and room bookings",
+        "Member-only events",
+        "Exclusive wellness facilities"
+      ],
+      "description": "A private members' club for people in creative industries"
+    },
+    {
+      "id": "velocityblack",
+      "name": "Velocity Black",
+      "type": "premium",
+      "websiteURL": "https://velocity.black",
+      "logoName": "velocityblack-logo",
+      "annualFee": 2800,
+      "features": [
+        "24/7 concierge service",
+        "Exclusive experiences",
+        "Priority access",
+        "Travel benefits"
+      ],
+      "benefits": [
+        "Last-minute restaurant reservations",
+        "Exclusive event access",
+        "Luxury travel planning",
+        "Lifestyle management"
+      ],
+      "description": "A next-generation members club for the digital age"
+    },
+    {
+      "id": "siennacharles",
+      "name": "Sienna Charles",
+      "type": "premium",
+      "websiteURL": "https://siennacharles.com",
+      "logoName": "siennacharles-logo",
+      "annualFee": 15000,
+      "features": [
+        "Personal luxury travel planning",
+        "Exclusive access",
+        "Bespoke experiences",
+        "Lifestyle management"
+      ],
+      "benefits": [
+        "Custom travel itineraries",
+        "Private jet arrangements",
+        "Restaurant impossible reservations",
+        "Personal shopping services"
+      ],
+      "description": "Ultra-luxury lifestyle and travel membership"
+    },
+    {
+      "id": "inspirato",
+      "name": "Inspirato",
+      "type": "premium",
+      "websiteURL": "https://www.inspirato.com",
+      "logoName": "inspirato-logo",
+      "annualFee": 2500,
+      "features": [
+        "Luxury vacation homes",
+        "Five-star hotels",
+        "Exclusive experiences",
+        "Personal travel planning"
+      ],
+      "benefits": [
+        "Access to luxury vacation portfolio",
+        "Dedicated care team",
+        "Special hotel rates",
+        "Exclusive member events"
+      ],
+      "description": "Luxury vacation club with exclusive properties and experiences"
+    },
+    {
+      "id": "reserveps",
+      "name": "ReservePS",
+      "type": "premium",
+      "websiteURL": "https://reserveps.com",
+      "logoName": "reserveps-logo",
+      "annualFee": 5000,
+      "features": [
+        "Exclusive restaurant access",
+        "Premium concierge service",
+        "Event planning",
+        "Lifestyle management"
+      ],
+      "benefits": [
+        "Priority restaurant reservations",
+        "Private event access",
+        "Personal concierge",
+        "Exclusive experiences"
+      ],
+      "description": "Premium lifestyle management and dining access service"
+    }
+  ]
+}
