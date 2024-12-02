@@ -57,6 +57,7 @@ struct ProfileViewController: View {
             }
             .navigationTitle("Profile")
             .background(Color.ascendBackground)
+            .accentColor(.ascendAccent)
             .scrollContentBackground(.hidden)
         }
     }

@@ -49,6 +49,8 @@ struct BenefitsView: View {
             .navigationTitle("Benefits")
             .listStyle(PlainListStyle())
         }
+        .background(Color.ascendBackground)
+        .accentColor(.ascendAccent)
     }
 }
 

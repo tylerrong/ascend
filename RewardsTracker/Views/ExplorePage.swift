@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ExplorePage: View {
     @State private var searchText = ""
-    @State private var selectedCategory: String?
+    @State private var selectedCategoryIndex: Int? = nil
     
     let categories = [
         ("Airlines", "airplane.circle.fill"),
@@ -18,6 +18,14 @@ struct ExplorePage: View {
             return ExclusiveMembershipService.shared.getAllPrograms()
         }
         return ExclusiveMembershipService.shared.searchPrograms(query: searchText)
+    }
+    
+    private var filteredPrograms: [ExclusiveMembership] {
+        guard let index = selectedCategoryIndex else {
+            return exclusivePrograms
+        }
+        let category = categories[index].0
+        return exclusivePrograms.filter { $0.category == category }
     }
     
     var body: some View {
@@ -39,29 +47,24 @@ struct ExplorePage: View {
                     VStack(alignment: .leading, spacing: 16) {
                         Text("Categories")
                             .font(.title2)
-                            .bold()
+                            .foregroundColor(.ascendAccent)
                             .padding(.horizontal)
                         
-                        LazyVGrid(columns: [
-                            GridItem(.flexible()),
-                            GridItem(.flexible()),
-                            GridItem(.flexible())
-                        ], spacing: 20) {
-                            ForEach(categories, id: \.0) { category in
-                                CategoryButton(
-                                    name: category.0,
-                                    icon: category.1,
-                                    isSelected: selectedCategory == category.0
-                                ) {
-                                    if selectedCategory == category.0 {
-                                        selectedCategory = nil
-                                    } else {
-                                        selectedCategory = category.0
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 16) {
+                                ForEach(categories.indices, id: \ .self) { index in
+                                    let category = categories[index]
+                                    CategoryButton(name: category.0, icon: category.1, isSelected: selectedCategoryIndex == index) {
+                                        if selectedCategoryIndex == index {
+                                            selectedCategoryIndex = nil
+                                        } else {
+                                            selectedCategoryIndex = index
+                                        }
                                     }
                                 }
                             }
+                            .padding(.horizontal)
                         }
-                        .padding(.horizontal)
                     }
                     
                     // Exclusive Memberships
@@ -73,7 +76,7 @@ struct ExplorePage: View {
                         
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 16) {
-                                ForEach(exclusivePrograms) { program in
+                                ForEach(filteredPrograms) { program in
                                     ExclusiveProgramCard(program: program)
                                 }
                             }
@@ -89,7 +92,7 @@ struct ExplorePage: View {
                             .padding(.horizontal)
                         
                         VStack(spacing: 16) {
-                            ForEach(exclusivePrograms.prefix(3)) { program in
+                            ForEach(filteredPrograms.prefix(3)) { program in
                                 ExclusiveDealCard(program: program)
                             }
                         }
@@ -100,6 +103,7 @@ struct ExplorePage: View {
             }
             .navigationTitle("Explore")
             .background(Color.ascendBackground)
+            .accentColor(.ascendAccent)
         }
     }
 }

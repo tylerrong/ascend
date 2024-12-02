@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Costco",
+        "tier": ["Gold Star", "Executive"]
+    },
+    {
+        "name": "Sam's Club",
+        "tier": ["Club", "Plus"]
+    },
+    {
+        "name": "Amazon Prime",
+        "tier": ["Standard"]
+    },
+    {
+        "name": "FoundersCard",
+        "tier": ["Standard", "Elite"]
+    },
+    {
+        "name": "Select",
+        "tier": ["Standard", "Premium"]
+    },
+    {
+        "name": "Soho House",
+        "tier": ["Local House", "Every House"]
+    }
+]

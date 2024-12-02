@@ -10,6 +10,7 @@ struct ExclusiveMembership: Codable, Identifiable {
     let features: [String]
     let benefits: [String]
     let description: String
+    let category: String
 }
 
 class ExclusiveMembershipService {

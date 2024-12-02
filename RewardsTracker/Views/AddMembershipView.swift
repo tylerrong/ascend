@@ -20,17 +20,24 @@ struct AddMembershipView: View {
     }
     
     @State private var selectedType: ProgramType = .airline
-    @State private var programName = ""
+    @State private var selectedProgram: String = ""
     @State private var membershipNumber = ""
+    @State private var programName = ""
+    
+    var availablePrograms: [String] {
+        switch selectedType {
+        case .airline:
+            return ["Delta", "American Airlines", "United"]
+        case .hotel:
+            return ["Hilton", "Marriott", "Hyatt"]
+        case .membership:
+            return ["Costco", "Sam's Club", "Amazon Prime"]
+        }
+    }
     
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("Program Details")) {
-                    TextField("Program Name", text: $programName)
-                    TextField("Membership Number", text: $membershipNumber)
-                }
-                
                 Section(header: Text("Program Type")) {
                     Picker("Type", selection: $selectedType) {
                         ForEach(ProgramType.allCases, id: \.self) { type in
@@ -38,6 +45,19 @@ struct AddMembershipView: View {
                         }
                     }
                     .pickerStyle(.segmented)
+                }
+                
+                Section(header: Text("Choose Program")) {
+                    Picker("Program", selection: $selectedProgram) {
+                        ForEach(availablePrograms, id: \.self) { program in
+                            Text(program).tag(program)
+                        }
+                    }
+                }
+                
+                Section(header: Text("Membership Details")) {
+                    TextField("Membership Number", text: $membershipNumber)
+                    TextField("Tier", text: $programName)
                 }
             }
             .navigationTitle("Add Program")
@@ -48,7 +68,7 @@ struct AddMembershipView: View {
                 trailing: Button("Save") {
                     saveProgram()
                 }
-                .disabled(programName.isEmpty)
+                .disabled(programName.isEmpty || membershipNumber.isEmpty)
             )
         }
     }
@@ -56,11 +76,11 @@ struct AddMembershipView: View {
     private func saveProgram() {
         let newMembership = MembershipEntity(context: viewContext)
         newMembership.id = UUID()
-        newMembership.name = programName
+        newMembership.name = selectedProgram
         newMembership.type = selectedType.rawValue
         newMembership.membership_number = membershipNumber
-        newMembership.tier = ""  // Default empty tier
-        newMembership.tier_progress = 0.0  // Default progress
+        newMembership.tier = programName
+        newMembership.tier_progress = 0.0
         
         // Set default benefits
         let defaultBenefits = ["Basic Member Benefits"]

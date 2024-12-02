@@ -1,0 +1,62 @@
+[
+    {
+        "name": "Hilton Honors",
+        "tier": ["Member", "Silver", "Gold", "Diamond"]
+    },
+    {
+        "name": "Marriott Bonvoy",
+        "tier": ["Member", "Silver Elite", "Gold Elite", "Platinum Elite"]
+    },
+    {
+        "name": "Hyatt World",
+        "tier": ["Member", "Discoverist", "Explorist", "Globalist"]
+    },
+    {
+        "name": "IHG One Rewards",
+        "tier": ["Club", "Gold Elite", "Platinum Elite", "Spire Elite"]
+    },
+    {
+        "name": "Wyndham Rewards",
+        "tier": ["Blue", "Gold", "Platinum", "Diamond"]
+    },
+    {
+        "name": "Choice Privileges",
+        "tier": ["Member", "Gold", "Platinum", "Diamond"]
+    },
+    {
+        "name": "ALL – Accor Live Limitless",
+        "tier": ["Classic", "Silver", "Gold", "Platinum"]
+    },
+    {
+        "name": "Best Western Rewards",
+        "tier": ["Blue", "Gold", "Platinum", "Diamond"]
+    },
+    {
+        "name": "Radisson Rewards",
+        "tier": ["Club", "Silver", "Gold", "Platinum"]
+    },
+    {
+        "name": "Sonesta Travel Pass",
+        "tier": ["Member", "Silver", "Gold", "Platinum"]
+    },
+    {
+        "name": "Select Guest",
+        "tier": ["Member", "Gold", "Platinum"]
+    },
+    {
+        "name": "YouFirst",
+        "tier": ["Member", "Gold", "Platinum"]
+    },
+    {
+        "name": "Drury Rewards",
+        "tier": ["Member", "Gold", "Platinum"]
+    },
+    {
+        "name": "MGM Rewards",
+        "tier": ["Sapphire", "Pearl", "Gold", "Platinum"]
+    },
+    {
+        "name": "Caesars Rewards",
+        "tier": ["Gold", "Platinum", "Diamond", "Seven Stars"]
+    }
+]

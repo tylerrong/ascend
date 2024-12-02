@@ -81,6 +81,15 @@ struct ContentView: View {
         }
         .accentColor(.ascendAccent)
         .background(Color.ascendBackground)
+        .background(Color(UIColor.systemGray6))
+        .onAppear {
+            let tabBarAppearance = UITabBarAppearance()
+            tabBarAppearance.backgroundColor = UIColor.systemGray6
+            UITabBar.appearance().standardAppearance = tabBarAppearance
+            if #available(iOS 15.0, *) {
+                UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+            }
+        }
     }
 }
 
@@ -93,9 +102,8 @@ struct HomePage: View {
     
     @State private var showingAddMembership = false
     @State private var showingOverview = false
-    @State private var searchText = ""
     
-    private var totalActiveCards: Int {
+    private var totalActiveAccounts: Int {
         memberships.count
     }
     
@@ -123,32 +131,30 @@ struct HomePage: View {
             VStack(alignment: .leading, spacing: 20) {
                 VStack(spacing: 16) {
                     HStack {
-                        Text("Your Ascend")
-                            .font(.title2)
-                            .fontWeight(.semibold)
+                        Text("Dashboard")
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
                             .foregroundColor(.ascendAccent)
                         Spacer()
-                        Button(action: { showingOverview.toggle() }) {
-                            HStack(spacing: 4) {
-                                Text("Overview")
-                                    .fontWeight(.medium)
-                                Image(systemName: "chevron.right")
-                            }
-                            .foregroundColor(.ascendAccent)
-                        }
                     }
+                    .padding(.horizontal)
                     
-                    LazyVGrid(columns: [
-                        GridItem(.flexible()),
-                        GridItem(.flexible())
-                    ], spacing: 16) {
-                        SummaryCard(value: "\(totalActiveCards)", label: "Active Cards")
+                    HStack {
+                        SummaryCard(value: "\(totalActiveAccounts)", label: "Active Accounts")
                         SummaryCard(value: "\(totalActiveOffers)", label: "Active Offers")
                         SummaryCard(value: "\(Int(totalProgress * 100))%", label: "Avg Progress")
                         SummaryCard(value: "\(totalBenefits)", label: "Total Benefits")
                     }
+                    .padding(.horizontal)
                 }
-                .padding(.horizontal)
+                .padding(.top)
+                
+                Text("Your Memberships")
+                    .font(.title2)
+                    .fontWeight(.bold)
+                    .foregroundColor(.ascendAccent)
+                    .padding(.horizontal)
+                    .padding(.top)
                 
                 ForEach(memberships) { membership in
                     NavigationLink(destination: MembershipDetailView(membership: membership)) {
@@ -158,9 +164,8 @@ struct HomePage: View {
             }
             .padding(.vertical)
         }
-        .searchable(text: $searchText)
         .background(Color.ascendBackground)
-        .navigationTitle("Ascend")
+        .accentColor(.ascendAccent)
         .navigationBarItems(trailing: Button(action: {
             showingAddMembership = true
         }) {
