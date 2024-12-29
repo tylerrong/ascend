@@ -10,13 +10,14 @@ import CoreData
 
 @main
 struct RewardsTrackerApp: App {
-    let persistenceController = PersistenceController.shared
+    @StateObject private var persistenceController = PersistenceController.shared
     @AppStorage("hasLoadedSampleData") private var hasLoadedSampleData = false
     
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environmentObject(persistenceController)
                 .onAppear {
                     if !hasLoadedSampleData {
                         SampleData.loadSampleData(context: persistenceController.container.viewContext)

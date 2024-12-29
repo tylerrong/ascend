@@ -1,11 +1,12 @@
 import CoreData
+import SwiftUI
 
-struct PersistenceController {
+final class PersistenceController: ObservableObject {
     static let shared = PersistenceController()
     
-    let container: NSPersistentContainer
+    @Published private(set) var container: NSPersistentContainer
     
-    init(inMemory: Bool = false) {
+    private init(inMemory: Bool = false) {
         container = NSPersistentContainer(name: "RewardsTracker")
         
         if inMemory {
@@ -37,36 +38,36 @@ struct PersistenceController {
         
         // Encode benefits data
         let aaBenefits = ["Priority Check-in", "Complimentary Upgrades", "Lounge Access"]
-        membership.benefits = aaBenefits
+        membership.benefits_data = try? JSONEncoder().encode(aaBenefits)
         
         let aaUpcomingBenefits = ["Executive Platinum Status", "Unlimited Upgrades"]
-        membership.upcomingBenefits = aaUpcomingBenefits
+        membership.upcomingBenefits_data = try? JSONEncoder().encode(aaUpcomingBenefits)
         
         let aaProgress = EliteProgressInfo(current: 75000, required: 100000, remaining: 25000, metric: "miles")
-        membership.statusProgress = aaProgress
+        membership.statusProgress_data = try? JSONEncoder().encode(aaProgress)
         
         let membership2 = MembershipEntity(context: viewContext)
         membership2.id = UUID()
         membership2.name = "Marriott Bonvoy"
         membership2.type = "hotel"
-        membership2.tier = "Platinum"
+        membership2.tier = "Platinum Elite"
         membership2.membership_number = "MB789012"
-        membership2.tier_progress = 0.85
+        membership2.tier_progress = 0.9
         
-        let marriottBenefits = ["Room Upgrades", "Late Checkout", "Welcome Gift"]
-        membership2.benefits = marriottBenefits
+        let bonvoyBenefits = ["Room Upgrades", "Late Checkout", "Welcome Gift"]
+        membership2.benefits_data = try? JSONEncoder().encode(bonvoyBenefits)
         
-        let marriottUpcomingBenefits = ["Ambassador Status", "Your24"]
-        membership2.upcomingBenefits = marriottUpcomingBenefits
+        let bonvoyUpcomingBenefits = ["Titanium Elite Status"]
+        membership2.upcomingBenefits_data = try? JSONEncoder().encode(bonvoyUpcomingBenefits)
         
-        let marriottProgress = EliteProgressInfo(current: 85, required: 100, remaining: 15, metric: "nights")
-        membership2.statusProgress = marriottProgress
+        let bonvoyProgress = EliteProgressInfo(current: 45, required: 50, remaining: 5, metric: "nights")
+        membership2.statusProgress_data = try? JSONEncoder().encode(bonvoyProgress)
         
         do {
             try viewContext.save()
         } catch {
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            let error = error as NSError
+            fatalError("Unresolved error: \(error)")
         }
         
         return controller

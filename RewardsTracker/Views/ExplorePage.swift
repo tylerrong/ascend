@@ -47,25 +47,30 @@ struct ExplorePage: View {
                     VStack(alignment: .leading, spacing: 16) {
                         Text("Categories")
                             .font(.title2)
-                            .foregroundColor(.ascendAccent)
+                            .fontWeight(.bold)
+                            .foregroundColor(.primary)
                             .padding(.horizontal)
                         
                         ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 16) {
-                                ForEach(categories.indices, id: \ .self) { index in
+                            HStack(spacing: 12) {
+                                ForEach(categories.indices, id: \.self) { index in
                                     let category = categories[index]
                                     CategoryButton(name: category.0, icon: category.1, isSelected: selectedCategoryIndex == index) {
-                                        if selectedCategoryIndex == index {
-                                            selectedCategoryIndex = nil
-                                        } else {
-                                            selectedCategoryIndex = index
+                                        withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                                            if selectedCategoryIndex == index {
+                                                selectedCategoryIndex = nil
+                                            } else {
+                                                selectedCategoryIndex = index
+                                            }
                                         }
                                     }
+                                    .frame(width: 100)
                                 }
                             }
                             .padding(.horizontal)
                         }
                     }
+                    .padding(.vertical, 8)
                     
                     // Exclusive Memberships
                     VStack(alignment: .leading, spacing: 16) {
@@ -116,20 +121,37 @@ struct CategoryButton: View {
     
     var body: some View {
         Button(action: action) {
-            VStack(spacing: 8) {
-                Image(systemName: icon)
-                    .font(.system(size: 32))
-                    .foregroundColor(isSelected ? .white : .ascendAccent)
+            VStack(spacing: 12) {
+                ZStack {
+                    Circle()
+                        .fill(isSelected ? Color.ascendAccent : Color(.systemBackground))
+                        .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 4)
+                        .frame(width: 60, height: 60)
+                    
+                    Image(systemName: icon)
+                        .font(.system(size: 24, weight: .semibold))
+                        .foregroundColor(isSelected ? .white : .ascendAccent)
+                }
+                
                 Text(name)
-                    .font(.caption)
+                    .font(.system(size: 12, weight: .medium))
                     .multilineTextAlignment(.center)
-                    .foregroundColor(isSelected ? .white : .ascendAccent)
+                    .foregroundColor(isSelected ? .ascendAccent : .primary)
+                    .lineLimit(2)
+                    .fixedSize(horizontal: false, vertical: true)
             }
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 12)
-            .background(isSelected ? Color.ascendAccent : Color(.systemBackground))
-            .cornerRadius(12)
+            .padding(.vertical, 8)
+            .contentShape(Rectangle())
         }
+        .buttonStyle(ScaleButtonStyle())
+    }
+}
+
+struct ScaleButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? 0.95 : 1)
+            .animation(.spring(response: 0.2, dampingFraction: 0.7), value: configuration.isPressed)
     }
 }
 

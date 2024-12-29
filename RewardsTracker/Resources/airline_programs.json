@@ -1,0 +1,180 @@
+{
+    "programs": [
+        {
+            "id": "550e8400-e29b-41d4-a716-446655440000",
+            "name": "United MileagePlus",
+            "website": "https://www.united.com/mileageplus",
+            "tiers": [
+                {
+                    "id": "550e8400-e29b-41d4-a716-446655440001",
+                    "name": "Member",
+                    "requirements": "None",
+                    "benefits": ["Earn 5 miles per dollar", "Basic seat selection"]
+                },
+                {
+                    "id": "550e8400-e29b-41d4-a716-446655440002",
+                    "name": "Premier Silver",
+                    "requirements": "12 PQF and 4,000 PQP or 5,000 PQP",
+                    "benefits": [
+                        "Complimentary access to Economy Plus seats at check-in",
+                        "Complimentary Premier upgrades",
+                        "7 miles per dollar",
+                        "Priority check-in and security lanes",
+                        "1 free checked bag",
+                        "Star Alliance Silver status"
+                    ]
+                },
+                {
+                    "id": "550e8400-e29b-41d4-a716-446655440003",
+                    "name": "Premier Gold",
+                    "requirements": "24 PQF and 8,000 PQP or 10,000 PQP",
+                    "benefits": [
+                        "Complimentary access to Economy Plus seats at booking",
+                        "Higher priority for upgrades",
+                        "8 miles per dollar",
+                        "2 free checked bags",
+                        "Star Alliance Gold status",
+                        "Lounge access on international flights"
+                    ]
+                },
+                {
+                    "id": "550e8400-e29b-41d4-a716-446655440004",
+                    "name": "Premier Platinum",
+                    "requirements": "36 PQF and 12,000 PQP or 15,000 PQP",
+                    "benefits": [
+                        "Higher upgrade priority",
+                        "9 miles per dollar",
+                        "3 free checked bags",
+                        "Fee waivers for same-day changes"
+                    ]
+                },
+                {
+                    "id": "550e8400-e29b-41d4-a716-446655440005",
+                    "name": "Premier 1K",
+                    "requirements": "54 PQF and 18,000 PQP or 24,000 PQP",
+                    "benefits": [
+                        "Highest upgrade priority",
+                        "11 miles per dollar",
+                        "Complimentary clear membership",
+                        "Global Services consideration"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "550e8400-e29b-41d4-a716-446655440006",
+            "name": "American Airlines AAdvantage",
+            "website": "https://www.aa.com/aadvantage",
+            "tiers": [
+                {
+                    "id": "550e8400-e29b-41d4-a716-446655440007",
+                    "name": "Member",
+                    "requirements": "None",
+                    "benefits": ["Earn 5 miles per dollar", "Basic seat selection"]
+                },
+                {
+                    "id": "550e8400-e29b-41d4-a716-446655440008",
+                    "name": "Gold",
+                    "requirements": "30,000 Loyalty Points",
+                    "benefits": [
+                        "40% elite mileage bonus",
+                        "Complimentary Main Cabin Extra and Preferred seats (24h before departure)",
+                        "1 free checked bag",
+                        "Priority check-in and boarding"
+                    ]
+                },
+                {
+                    "id": "550e8400-e29b-41d4-a716-446655440009",
+                    "name": "Platinum",
+                    "requirements": "75,000 Loyalty Points",
+                    "benefits": [
+                        "60% elite mileage bonus",
+                        "Complimentary Main Cabin Extra and Preferred seats",
+                        "2 free checked bags",
+                        "oneworld Sapphire status"
+                    ]
+                },
+                {
+                    "id": "550e8400-e29b-41d4-a716-446655440010",
+                    "name": "Platinum Pro",
+                    "requirements": "125,000 Loyalty Points",
+                    "benefits": [
+                        "80% elite mileage bonus",
+                        "Complimentary upgrades on all flights",
+                        "3 free checked bags",
+                        "Same-day flight changes"
+                    ]
+                },
+                {
+                    "id": "550e8400-e29b-41d4-a716-446655440011",
+                    "name": "Executive Platinum",
+                    "requirements": "200,000 Loyalty Points",
+                    "benefits": [
+                        "120% elite mileage bonus",
+                        "4 systemwide upgrades",
+                        "3 free checked bags",
+                        "Complimentary same-day flight changes"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "550e8400-e29b-41d4-a716-446655440012",
+            "name": "Delta SkyMiles",
+            "website": "https://www.delta.com/skymiles",
+            "tiers": [
+                {
+                    "id": "550e8400-e29b-41d4-a716-446655440013",
+                    "name": "Member",
+                    "requirements": "None",
+                    "benefits": ["Earn 5 miles per dollar", "Basic seat selection"]
+                },
+                {
+                    "id": "550e8400-e29b-41d4-a716-446655440014",
+                    "name": "Silver Medallion",
+                    "requirements": "25,000 MQMs or 30 MQSs AND $3,000 MQDs",
+                    "benefits": [
+                        "7 miles per dollar",
+                        "Complimentary upgrades 24 hours before departure",
+                        "1 free checked bag",
+                        "Priority check-in and boarding"
+                    ]
+                },
+                {
+                    "id": "550e8400-e29b-41d4-a716-446655440015",
+                    "name": "Gold Medallion",
+                    "requirements": "50,000 MQMs or 60 MQSs AND $6,000 MQDs",
+                    "benefits": [
+                        "8 miles per dollar",
+                        "Complimentary upgrades 72 hours before departure",
+                        "2 free checked bags",
+                        "SkyTeam Elite Plus status"
+                    ]
+                },
+                {
+                    "id": "550e8400-e29b-41d4-a716-446655440016",
+                    "name": "Platinum Medallion",
+                    "requirements": "75,000 MQMs or 100 MQSs AND $9,000 MQDs",
+                    "benefits": [
+                        "9 miles per dollar",
+                        "Complimentary upgrades 120 hours before departure",
+                        "3 free checked bags",
+                        "Choice Benefits selection"
+                    ]
+                },
+                {
+                    "id": "550e8400-e29b-41d4-a716-446655440017",
+                    "name": "Diamond Medallion",
+                    "requirements": "125,000 MQMs or 140 MQSs AND $15,000 MQDs",
+                    "benefits": [
+                        "11 miles per dollar",
+                        "Complimentary upgrades 120 hours before departure",
+                        "3 free checked bags",
+                        "Delta Sky Club access",
+                        "Three Choice Benefits selections"
+                    ]
+                }
+            ]
+        }
+    ]
+}

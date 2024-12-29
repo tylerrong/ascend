@@ -1,7 +1,6 @@
 import Foundation
 import CoreData
 
-// Keep this as a separate struct
 struct EliteProgressInfo: Codable {
     let current: Int
     let required: Int
@@ -9,9 +8,7 @@ struct EliteProgressInfo: Codable {
     let metric: String
 }
 
-// Only extend the CoreData generated MembershipEntity
 extension MembershipEntity {
-    // Computed properties for benefits
     var benefits: [String] {
         get {
             if let data = benefits_data,
