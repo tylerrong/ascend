@@ -47,168 +47,156 @@ struct ContentView: View {
     @State private var selectedTab = 0
     
     var totalPoints: Int {
-        // Calculate total points from all memberships
-        // This is a placeholder - implement actual calculation
-        91200
+        memberships.reduce(0) { total, membership in
+            total + (membership.value(forKey: "points") as? Int ?? 0)
+        }
     }
     
     var body: some View {
         TabView(selection: $selectedTab) {
-            // Home Tab
+            // Portfolio Tab
             NavigationView {
                 ScrollView {
-                    VStack(spacing: 24) {
-                        // Points Summary Card
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 30)
-                                .fill(Color.ascendAccent)
-                                .frame(height: 200)
-                            
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text("\(formatNumber(totalPoints))")
-                                    .font(.system(size: 48, weight: .bold))
+                    VStack(spacing: AscendTheme.Spacing.xl) {
+                        // Portfolio Header
+                        HStack {
+                            Text("Portfolio")
+                                .font(.title2)
+                                .fontWeight(.semibold)
+                            Spacer()
+                            Button(action: { showingAddMembership.toggle() }) {
+                                Text("Add")
+                                    .font(.subheadline)
+                                    .padding(.horizontal, 12)
+                                    .padding(.vertical, 6)
+                                    .background(AscendTheme.Colors.primary)
                                     .foregroundColor(.white)
-                                Text("Total Points")
-                                    .font(.title2)
-                                    .foregroundColor(.white.opacity(0.9))
+                                    .cornerRadius(AscendTheme.CornerRadius.sm)
                             }
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.horizontal, 24)
                         }
                         .padding(.horizontal)
                         
-                        // Memberships Section
-                        VStack(alignment: .leading, spacing: 16) {
-                            HStack {
-                                Text("Your Memberships")
-                                    .font(.title2)
-                                    .fontWeight(.bold)
-                                Spacer()
-                                Button("+ ADD MORE") {
-                                    showingAddMembership = true
-                                }
-                                .foregroundColor(.ascendAccent)
+                        // Total Points Card
+                        VStack(alignment: .leading, spacing: AscendTheme.Spacing.sm) {
+                            Text("Total Points")
                                 .font(.subheadline)
-                                .fontWeight(.semibold)
+                                .foregroundColor(AscendTheme.Colors.textSecondary)
+                            Text("\(formatNumber(totalPoints))")
+                                .font(.system(size: 36, weight: .bold))
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding()
+                        .background(AscendTheme.Colors.surface)
+                        .cornerRadius(AscendTheme.CornerRadius.lg)
+                        .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 2)
+                        .padding(.horizontal)
+                        
+                        // Points by Type
+                        VStack(alignment: .leading, spacing: AscendTheme.Spacing.md) {
+                            Text("Points by Type")
+                                .font(.headline)
+                                .padding(.horizontal)
+                            
+                            HStack(spacing: AscendTheme.Spacing.md) {
+                                PointsTypeCard(title: "Airline Points", points: totalPoints / 2)
+                                    .background(AscendTheme.Colors.surface)
+                                    .cornerRadius(AscendTheme.CornerRadius.lg)
+                                    .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 2)
+                                
+                                PointsTypeCard(title: "Hotel Points", points: totalPoints / 2)
+                                    .background(AscendTheme.Colors.surface)
+                                    .cornerRadius(AscendTheme.CornerRadius.lg)
+                                    .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 2)
                             }
                             .padding(.horizontal)
-                            
-                            ForEach(memberships) { membership in
-                                NavigationLink(destination: MembershipDetailView(membership: membership)) {
-                                    HStack(spacing: 16) {
-                                        // Program Logo
-                                        ZStack {
-                                            Circle()
-                                                .fill(Color.gray.opacity(0.1))
-                                                .frame(width: 50, height: 50)
-                                            
-                                            Image(systemName: membership.type == "airline" ? "airplane" : "bed.double")
-                                                .font(.system(size: 24))
-                                                .foregroundColor(.ascendAccent)
-                                        }
-                                        
-                                        // Program Details
-                                        VStack(alignment: .leading, spacing: 4) {
-                                            Text(membership.name ?? "")
-                                                .font(.headline)
-                                            Text(membership.membership_number ?? "")
-                                                .font(.subheadline)
-                                                .foregroundColor(.gray)
-                                            
-                                            HStack {
-                                                Text(membership.tier ?? "")
-                                                    .font(.system(size: 12, weight: .medium))
-                                                    .padding(.horizontal, 8)
-                                                    .padding(.vertical, 4)
-                                                    .background(Color.ascendAccent.opacity(0.1))
-                                                    .foregroundColor(.ascendAccent)
-                                                    .cornerRadius(12)
-                                            }
-                                        }
-                                        
-                                        Spacer()
-                                        
-                                        // Points
-                                        VStack(alignment: .trailing) {
-                                            Text("90K")
-                                                .font(.title2)
-                                                .fontWeight(.bold)
-                                                .foregroundColor(.ascendAccent)
-                                        }
-                                    }
-                                    .padding()
-                                    .background(Color(.systemBackground))
-                                    .cornerRadius(16)
-                                    .shadow(color: Color.black.opacity(0.05), radius: 10, x: 0, y: 5)
-                                }
-                                .padding(.horizontal)
-                            }
                         }
                         
-                        // Recent Articles Section
-                        VStack(alignment: .leading, spacing: 16) {
-                            HStack {
-                                Text("Recent Articles")
-                                    .font(.title2)
-                                    .fontWeight(.bold)
-                                Spacer()
-                                NavigationLink("See All") {
-                                    Text("Articles View") // Placeholder
-                                }
-                                .foregroundColor(.ascendAccent)
-                                .font(.subheadline)
-                                .fontWeight(.semibold)
-                            }
+                        Divider()
                             .padding(.horizontal)
-                            
-                            ScrollView(.horizontal, showsIndicators: false) {
-                                HStack(spacing: 16) {
-                                    ForEach(1...3, id: \.self) { _ in
-                                        ArticleCard()
-                                    }
-                                }
+                        
+                        // Membership Benefits
+                        VStack(alignment: .leading, spacing: AscendTheme.Spacing.md) {
+                            Text("Membership Benefits")
+                                .font(.headline)
                                 .padding(.horizontal)
+                            
+                            if memberships.isEmpty {
+                                Text("Add your first membership to see benefits")
+                                    .font(.subheadline)
+                                    .foregroundColor(AscendTheme.Colors.textSecondary)
+                                    .frame(maxWidth: .infinity, alignment: .center)
+                                    .padding()
+                                    .background(AscendTheme.Colors.surface)
+                                    .cornerRadius(AscendTheme.CornerRadius.lg)
+                            } else {
+                                ForEach(memberships) { membership in
+                                    BenefitRow(membership: membership)
+                                        .padding()
+                                        .background(AscendTheme.Colors.surface)
+                                        .cornerRadius(AscendTheme.CornerRadius.lg)
+                                        .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 2)
+                                }
                             }
                         }
+                        .padding(.horizontal)
                     }
                     .padding(.vertical)
                 }
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Button(action: {}) {
-                            Image(systemName: "square.and.arrow.up")
-                                .foregroundColor(.ascendAccent)
-                        }
-                    }
-                }
+                .background(AscendTheme.Colors.background.ignoresSafeArea())
+                .navigationBarHidden(true)
             }
             .tabItem {
-                Image(systemName: selectedTab == 0 ? "house.fill" : "house")
-                Text("Home")
+                Image(systemName: "house")
+                    .font(.system(size: 24))
+                    .imageScale(.large)
             }
             .tag(0)
             
             // Explore Tab
             ExplorePage()
                 .tabItem {
-                    Image(systemName: selectedTab == 1 ? "airplane.circle.fill" : "airplane.circle")
-                    Text("Explore")
+                    Image(systemName: "magnifyingglass")
+                        .font(.system(size: 24))
+                        .imageScale(.large)
                 }
                 .tag(1)
             
             // Profile Tab
             ProfileViewController()
                 .tabItem {
-                    Image(systemName: selectedTab == 2 ? "person.fill" : "person")
-                    Text("Profile")
+                    Image(systemName: "person")
+                        .font(.system(size: 24))
+                        .imageScale(.large)
                 }
                 .tag(2)
+        }
+        .onAppear {
+            let appearance = UITabBarAppearance()
+            appearance.configureWithTransparentBackground()
+            appearance.backgroundColor = UIColor.systemBackground
+            
+            // Adjust tab bar item appearance
+            let itemAppearance = UITabBarItemAppearance()
+            
+            // Adjust the position of the icons
+            itemAppearance.normal.iconColor = UIColor(AscendTheme.Colors.textSecondary)
+            itemAppearance.selected.iconColor = UIColor(AscendTheme.Colors.primary)
+            
+            // Add some padding at the bottom
+            appearance.stackedLayoutAppearance = itemAppearance
+            appearance.inlineLayoutAppearance = itemAppearance
+            appearance.compactInlineLayoutAppearance = itemAppearance
+            
+            UITabBar.appearance().standardAppearance = appearance
+            UITabBar.appearance().scrollEdgeAppearance = appearance
+            
+            // Adjust the height of the tab bar
+            UITabBar.appearance().bounds.size.height = 80
         }
         .sheet(isPresented: $showingAddMembership) {
             AddMembershipView()
         }
-        .accentColor(.ascendAccent)
+        .accentColor(AscendTheme.Colors.primary)
     }
     
     private func formatNumber(_ number: Int) -> String {
@@ -217,6 +205,43 @@ struct ContentView: View {
             return String(format: "%.1fK", decimal)
         }
         return "\(number)"
+    }
+}
+
+struct PointsTypeCard: View {
+    let title: String
+    let points: Int
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(title)
+                .font(.subheadline)
+                .foregroundColor(AscendTheme.Colors.textSecondary)
+            Text("\(points)")
+                .font(.headline)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding()
+        .background(AscendTheme.Colors.surface)
+        .cornerRadius(AscendTheme.CornerRadius.lg)
+    }
+}
+
+struct BenefitRow: View {
+    let membership: MembershipEntity
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(membership.name ?? "")
+                .font(.headline)
+            Text(membership.tier ?? "")
+                .font(.subheadline)
+                .foregroundColor(AscendTheme.Colors.textSecondary)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding()
+        .background(AscendTheme.Colors.surface)
+        .cornerRadius(AscendTheme.CornerRadius.lg)
     }
 }
 

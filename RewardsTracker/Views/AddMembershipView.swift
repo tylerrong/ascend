@@ -1,220 +1,152 @@
 import SwiftUI
-import CoreData
 
 struct AddMembershipView: View {
-    @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.managedObjectContext) private var viewContext
     
-    @State private var selectedProgram = ""
-    @State private var selectedStatus = ""
-    @State private var membershipNumber = ""
-    @State private var currentPoints = ""
+    @State private var selectedType: MembershipType?
+    @State private var name: String = ""
+    @State private var membershipNumber: String = ""
+    @State private var tier: String = ""
+    @State private var currentPoints: String = ""
     
-    private var airlinePrograms: [AirlineProgram] {
-        AirlineProgramService.shared.getAllPrograms()
-    }
-    
-    private var selectedProgramDetails: AirlineProgram? {
-        AirlineProgramService.shared.getProgram(named: selectedProgram)
-    }
-    
-    private var programTiers: [String] {
-        selectedProgramDetails?.tiers.map { $0.name } ?? []
-    }
-    
-    private var programWebsite: String {
-        selectedProgramDetails?.website ?? "https://www.united.com/mileageplus"
+    enum MembershipType: String, CaseIterable {
+        case airline = "Airline"
+        case hotel = "Hotel"
+        case other = "Membership"
     }
     
     var body: some View {
         NavigationView {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 24) {
-                    // Header with back and delete buttons
+            if selectedType == nil {
+                // Selection View
+                VStack(spacing: AscendTheme.Spacing.lg) {
+                    // Header
                     HStack {
                         Button(action: { dismiss() }) {
-                            Image(systemName: "chevron.left")
-                                .foregroundColor(.black)
-                                .imageScale(.large)
+                            Image(systemName: "arrow.left")
+                                .foregroundColor(AscendTheme.Colors.text)
                         }
+                        Text("Select")
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                            .foregroundColor(AscendTheme.Colors.text)
                         Spacer()
-                        Button(action: { dismiss() }) {
-                            Image(systemName: "trash")
-                                .foregroundColor(.red)
-                                .imageScale(.large)
-                        }
                     }
-                    .padding(.horizontal)
+                    .padding(.bottom, AscendTheme.Spacing.md)
                     
-                    // Airline Section
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Airline")
-                            .font(.headline)
-                            .foregroundColor(.black)
-                        
-                        Picker("Program", selection: $selectedProgram) {
-                            Text("Select Program").tag("")
-                            ForEach(airlinePrograms, id: \.name) { program in
-                                Text(program.name).tag(program.name)
-                            }
-                        }
-                        .pickerStyle(MenuPickerStyle())
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .padding(.vertical, 8)
-                        
-                        if !selectedProgram.isEmpty {
-                            Link("Visit \(selectedProgram)'s website to know details",
-                                 destination: URL(string: programWebsite)!)
-                                .foregroundColor(.blue)
-                        }
-                    }
-                    .padding(.horizontal)
-                    
-                    if !selectedProgram.isEmpty {
-                        // Status Section
-                        VStack(alignment: .leading, spacing: 16) {
-                            Text("Status")
-                                .font(.headline)
-                                .foregroundColor(.black)
-                            
-                            ScrollView(.horizontal, showsIndicators: false) {
-                                HStack(spacing: 12) {
-                                    ForEach(programTiers, id: \.self) { tier in
-                                        StatusButton(title: tier,
-                                                   isSelected: selectedStatus == tier,
-                                                   action: { selectedStatus = tier })
-                                    }
+                    // Membership Type Selection
+                    VStack(spacing: AscendTheme.Spacing.md) {
+                        ForEach(MembershipType.allCases, id: \.self) { type in
+                            Button(action: { selectedType = type }) {
+                                HStack {
+                                    Text(type.rawValue)
+                                        .fontWeight(.medium)
+                                    Spacer()
                                 }
+                                .padding()
+                                .frame(maxWidth: .infinity)
+                                .background(AscendTheme.Colors.primary)
+                                .foregroundColor(.white)
+                                .cornerRadius(AscendTheme.CornerRadius.md)
                             }
-                            .padding(.vertical, 4)
-                        }
-                        .padding(.horizontal)
-                        
-                        // Membership Number Section
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text("Membership / Frequent Flyer No")
-                                .font(.headline)
-                                .foregroundColor(.black)
-                            
-                            TextField("Enter number", text: $membershipNumber)
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
-                                .padding(.vertical, 8)
-                        }
-                        .padding(.horizontal)
-                        
-                        // Current Points Section
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text("Current Points")
-                                .font(.headline)
-                                .foregroundColor(.black)
-                            
-                            TextField("Enter points", text: $currentPoints)
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
-                                .keyboardType(.numberPad)
-                                .padding(.vertical, 8)
-                        }
-                        .padding(.horizontal)
-                        
-                        if let program = selectedProgramDetails,
-                           let selectedTier = program.tiers.first(where: { $0.name == selectedStatus }) {
-                            // Benefits Section
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text("Benefits at \(selectedStatus)")
-                                    .font(.headline)
-                                    .foregroundColor(.black)
-                                
-                                ForEach(selectedTier.benefits, id: \.self) { benefit in
-                                    HStack(alignment: .top) {
-                                        Image(systemName: "checkmark.circle.fill")
-                                            .foregroundColor(.green)
-                                        Text(benefit)
-                                            .font(.subheadline)
-                                    }
-                                }
-                            }
-                            .padding(.horizontal)
-                            
-                            // Requirements Section
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text("Requirements")
-                                    .font(.headline)
-                                    .foregroundColor(.black)
-                                
-                                Text(selectedTier.requirements)
-                                    .font(.subheadline)
-                                    .foregroundColor(.secondary)
-                            }
-                            .padding(.horizontal)
                         }
                     }
                     
                     Spacer()
                     
-                    // Submit Button
-                    Button(action: saveProgram) {
-                        Text("Submit")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color.blue.opacity(0.8))
-                            .cornerRadius(12)
+                    // Bottom Navigation Bar
+                    HStack(spacing: AscendTheme.Spacing.xl) {
+                        Button(action: {}) {
+                            Image(systemName: "house")
+                                .font(.system(size: 20))
+                                .foregroundColor(AscendTheme.Colors.textSecondary)
+                        }
+                        
+                        Button(action: {}) {
+                            Image(systemName: "magnifyingglass")
+                                .font(.system(size: 20))
+                                .foregroundColor(AscendTheme.Colors.textSecondary)
+                        }
+                        
+                        Button(action: {}) {
+                            Image(systemName: "person")
+                                .font(.system(size: 20))
+                                .foregroundColor(AscendTheme.Colors.textSecondary)
+                        }
+                    }
+                    .padding(.top, AscendTheme.Spacing.md)
+                    .padding(.bottom, AscendTheme.Spacing.sm)
+                }
+                .padding()
+                .background(AscendTheme.Colors.background.ignoresSafeArea())
+            } else {
+                // Add Membership Form
+                ScrollView {
+                    VStack(spacing: AscendTheme.Spacing.xl) {
+                        VStack(alignment: .leading, spacing: AscendTheme.Spacing.md) {
+                            Text(selectedType?.rawValue ?? "")
+                                .font(.headline)
+                                .foregroundColor(AscendTheme.Colors.textSecondary)
+                            
+                            TextField("Name", text: $name)
+                                .textFieldStyle(AscendTextFieldStyle())
+                            
+                            TextField("Membership ID", text: $membershipNumber)
+                                .textFieldStyle(AscendTextFieldStyle())
+                            
+                            TextField("Current Points", text: $currentPoints)
+                                .textFieldStyle(AscendTextFieldStyle())
+                                .keyboardType(.numberPad)
+                            
+                            TextField("Tier", text: $tier)
+                                .textFieldStyle(AscendTextFieldStyle())
+                        }
+                        
+                        Button("Add") {
+                            addMembership()
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(AscendTheme.Colors.primary)
+                        .foregroundColor(.white)
+                        .cornerRadius(AscendTheme.CornerRadius.md)
+                        
+                        Spacer()
                     }
                     .padding()
-                    .disabled(selectedProgram.isEmpty || membershipNumber.isEmpty || selectedStatus.isEmpty)
                 }
-                .padding(.vertical)
+                .navigationBarItems(
+                    leading: Button("Back") {
+                        selectedType = nil
+                    }
+                )
             }
-            .background(Color(.systemBackground))
         }
-        .navigationBarHidden(true)
     }
     
-    private func saveProgram() {
-        let newMembership = MembershipEntity(context: viewContext)
-        newMembership.id = UUID()
-        newMembership.name = selectedProgram
-        newMembership.type = "airline"
-        newMembership.membership_number = membershipNumber
-        newMembership.tier = selectedStatus
-        newMembership.tier_progress = 0.0
+    private func addMembership() {
+        let membership = MembershipEntity(context: viewContext)
+        membership.id = UUID()
+        membership.name = name
+        membership.membership_number = membershipNumber
+        membership.tier = tier
+        membership.type = selectedType?.rawValue.lowercased() ?? "other"
         
-        // Set benefits based on selected tier
-        if let program = selectedProgramDetails,
-           let selectedTier = program.tiers.first(where: { $0.name == selectedStatus }) {
-            newMembership.benefits = selectedTier.benefits
-        } else {
-            newMembership.benefits = ["Basic Member Benefits"]
+        if let points = Int64(currentPoints) {
+            membership.points = points
         }
         
         do {
             try viewContext.save()
             dismiss()
         } catch {
-            print("Error saving program: \(error.localizedDescription)")
-        }
-    }
-}
-
-struct StatusButton: View {
-    let title: String
-    let isSelected: Bool
-    let action: () -> Void
-    
-    var body: some View {
-        Button(action: action) {
-            Text(title)
-                .font(.subheadline)
-                .padding(.horizontal, 16)
-                .padding(.vertical, 8)
-                .background(isSelected ? Color.blue.opacity(0.8) : Color.gray.opacity(0.1))
-                .foregroundColor(isSelected ? .white : .black)
-                .cornerRadius(20)
+            print("Error saving membership: \(error)")
         }
     }
 }
 
 #Preview {
     AddMembershipView()
-        .environment(\.managedObjectContext, PreviewData.preview)
+        .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
 }

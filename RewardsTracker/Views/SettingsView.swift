@@ -8,19 +8,18 @@ struct SettingsView: View {
     
     var body: some View {
         NavigationView {
-            Form {
+            List {
                 Section("Profile") {
                     HStack {
                         Image(systemName: "person.circle.fill")
-                            .font(.system(size: 60))
-                            .foregroundColor(.blue)
-                        
+                            .foregroundColor(AscendTheme.Colors.primary)
                         VStack(alignment: .leading) {
                             Text(username.isEmpty ? "Set up profile" : username)
                                 .font(.headline)
+                                .foregroundColor(AscendTheme.Colors.text)
                             Text("Tap to edit profile")
                                 .font(.subheadline)
-                                .foregroundColor(.secondary)
+                                .foregroundColor(AscendTheme.Colors.textSecondary)
                         }
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -32,12 +31,14 @@ struct SettingsView: View {
                 
                 Section("Notifications") {
                     Toggle("Enable Notifications", isOn: $notificationsEnabled)
+                        .foregroundColor(AscendTheme.Colors.text)
                     
                     if notificationsEnabled {
                         Stepper("Alert \(expirationAlertDays) days before expiry", 
                                value: $expirationAlertDays,
                                in: 7...90,
                                step: 7)
+                            .foregroundColor(AscendTheme.Colors.text)
                     }
                 }
                 
@@ -45,24 +46,32 @@ struct SettingsView: View {
                     Button("Export Data") {
                         exportData()
                     }
+                    .foregroundColor(AscendTheme.Colors.text)
                     
                     Button("Import Data") {
                         importData()
                     }
+                    .foregroundColor(AscendTheme.Colors.text)
                 }
                 
                 Section("About") {
                     Link("Privacy Policy", destination: URL(string: "https://example.com/privacy")!)
+                        .foregroundColor(AscendTheme.Colors.text)
                     Link("Terms of Service", destination: URL(string: "https://example.com/terms")!)
+                        .foregroundColor(AscendTheme.Colors.text)
                     HStack {
                         Text("Version")
+                            .foregroundColor(AscendTheme.Colors.textSecondary)
                         Spacer()
                         Text("1.0.0")
-                            .foregroundColor(.secondary)
+                            .foregroundColor(AscendTheme.Colors.textSecondary)
                     }
                 }
             }
             .navigationTitle("Settings")
+            .navigationBarTitleDisplayMode(.inline)
+            .background(AscendTheme.Colors.background)
+            .scrollContentBackground(.hidden)
         }
         .sheet(isPresented: $showingProfileSheet) {
             NavigationView {

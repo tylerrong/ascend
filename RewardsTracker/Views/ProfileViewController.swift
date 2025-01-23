@@ -19,45 +19,45 @@ struct ProfileViewController: View {
                 Section(header: Text("App Settings")) {
                     NavigationLink(destination: NotificationSettingsView()) {
                         Label("Notifications", systemImage: "bell.fill")
-                            .foregroundColor(.ascendAccent)
+                            .foregroundColor(AscendTheme.Colors.primary)
                     }
                     
                     NavigationLink(destination: AppearanceSettingsView()) {
                         Label("Appearance", systemImage: "paintbrush.fill")
-                            .foregroundColor(.ascendAccent)
+                            .foregroundColor(AscendTheme.Colors.primary)
                     }
                 }
                 
                 Section(header: Text("Data Management")) {
                     Button(action: exportData) {
                         Label("Export Data", systemImage: "square.and.arrow.up")
-                            .foregroundColor(.ascendAccent)
+                            .foregroundColor(AscendTheme.Colors.primary)
                     }
                     
                     Button(action: importData) {
                         Label("Import Data", systemImage: "square.and.arrow.down")
-                            .foregroundColor(.ascendAccent)
+                            .foregroundColor(AscendTheme.Colors.primary)
                     }
                 }
                 
                 Section(header: Text("About")) {
                     Link(destination: URL(string: "https://www.example.com/privacy")!) {
                         Label("Privacy Policy", systemImage: "lock.fill")
-                            .foregroundColor(.ascendAccent)
+                            .foregroundColor(AscendTheme.Colors.primary)
                     }
                     
                     Link(destination: URL(string: "https://www.example.com/terms")!) {
                         Label("Terms of Service", systemImage: "doc.text.fill")
-                            .foregroundColor(.ascendAccent)
+                            .foregroundColor(AscendTheme.Colors.primary)
                     }
                     
                     Label("Version 1.0.0", systemImage: "info.circle.fill")
-                        .foregroundColor(.secondary)
+                        .foregroundColor(AscendTheme.Colors.textSecondary)
                 }
             }
             .navigationTitle("Profile")
-            .background(Color.ascendBackground)
-            .accentColor(.ascendAccent)
+            .background(AscendTheme.Colors.background.ignoresSafeArea())
+            .accentColor(AscendTheme.Colors.primary)
             .scrollContentBackground(.hidden)
         }
     }

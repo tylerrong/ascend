@@ -49,8 +49,8 @@ struct BenefitsView: View {
             .navigationTitle("Benefits")
             .listStyle(PlainListStyle())
         }
-        .background(Color.ascendBackground)
-        .accentColor(.ascendAccent)
+        .background(AscendTheme.Colors.background)
+        .accentColor(AscendTheme.Colors.accent)
     }
 }
 
@@ -59,18 +59,18 @@ struct BenefitCard: View {
     @State private var isExpanded = false
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: AscendTheme.Spacing.md) {
             HStack {
                 VStack(alignment: .leading) {
                     Text(membership.name ?? "Unknown Program")
                         .font(.headline)
                     Text(membership.tier ?? "No Tier")
                         .font(.subheadline)
-                        .foregroundColor(.secondary)
+                        .foregroundColor(AscendTheme.Colors.textSecondary)
                 }
                 Spacer()
                 Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
-                    .foregroundColor(.secondary)
+                    .foregroundColor(AscendTheme.Colors.textSecondary)
             }
             .contentShape(Rectangle())
             .onTapGesture {
@@ -80,11 +80,11 @@ struct BenefitCard: View {
             }
             
             if isExpanded {
-                VStack(alignment: .leading, spacing: 16) {
+                VStack(alignment: .leading, spacing: AscendTheme.Spacing.md) {
                     BenefitSection(title: "Current Benefits", benefits: membership.benefits)
                     
                     if !membership.upcomingBenefits.isEmpty {
-                        BenefitSection(title: "Next Tier Benefits", benefits: membership.upcomingBenefits)
+                        BenefitSection(title: "Upcoming Benefits", benefits: membership.upcomingBenefits)
                     }
                     
                     if let progress = membership.statusProgress {
@@ -94,8 +94,8 @@ struct BenefitCard: View {
             }
         }
         .padding()
-        .background(Color(.systemBackground))
-        .cornerRadius(10)
+        .background(AscendTheme.Colors.surface)
+        .cornerRadius(AscendTheme.CornerRadius.lg)
         .shadow(radius: 2)
     }
 }
@@ -105,13 +105,13 @@ struct BenefitSection: View {
     let benefits: [String]
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: AscendTheme.Spacing.sm) {
             Text(title)
                 .font(.subheadline)
-                .foregroundColor(.secondary)
+                .foregroundColor(AscendTheme.Colors.textSecondary)
             
             ForEach(benefits, id: \.self) { benefit in
-                HStack {
+                HStack(spacing: AscendTheme.Spacing.sm) {
                     Image(systemName: "checkmark.circle.fill")
                         .foregroundColor(.green)
                     Text(benefit)
@@ -126,10 +126,10 @@ struct ProgressSection: View {
     let progress: EliteProgressInfo
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: AscendTheme.Spacing.sm) {
             Text("Status Progress")
                 .font(.subheadline)
-                .foregroundColor(.secondary)
+                .foregroundColor(AscendTheme.Colors.textSecondary)
             
             HStack {
                 Text("\(progress.current) / \(progress.required) \(progress.metric)")
@@ -137,7 +137,7 @@ struct ProgressSection: View {
                 Spacer()
                 Text("\(progress.remaining) to go")
                     .font(.caption)
-                    .foregroundColor(.secondary)
+                    .foregroundColor(AscendTheme.Colors.textSecondary)
             }
             
             ProgressView(value: Float(progress.current) / Float(progress.required))
@@ -152,7 +152,7 @@ struct SearchBar: View {
     var body: some View {
         HStack {
             Image(systemName: "magnifyingglass")
-                .foregroundColor(.secondary)
+                .foregroundColor(AscendTheme.Colors.textSecondary)
             
             TextField("Search programs", text: $text)
                 .textFieldStyle(PlainTextFieldStyle())
@@ -162,13 +162,13 @@ struct SearchBar: View {
                     text = ""
                 }) {
                     Image(systemName: "xmark.circle.fill")
-                        .foregroundColor(.secondary)
+                        .foregroundColor(AscendTheme.Colors.textSecondary)
                 }
             }
         }
-        .padding(8)
-        .background(Color(.systemGray6))
-        .cornerRadius(10)
+        .padding(AscendTheme.Spacing.sm)
+        .background(AscendTheme.Colors.surface)
+        .cornerRadius(AscendTheme.CornerRadius.md)
     }
 }
 
